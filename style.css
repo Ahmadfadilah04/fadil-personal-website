@@ -1,0 +1,848 @@
+/* ===================================================================
+   PORTFOLIO WEBSITE - AHMAD FADILAH
+   STYLESHEET (VERSI FINALNavbar Diperbaiki)
+
+   TABLE OF CONTENTS
+   1. General Setup (Variables, Reset, Body)
+   2. Reusable Components (Buttons, Titles, Animations)
+   3. Layout (Header, Footer, Container)
+   4. Page-Specific Styles
+      - 4.1. Page: Home (Hero, CTA, Portfolio)
+      - 4.2. Page: About (Intro, Skills, Education)
+      - 4.3. Page: Services (Service Cards)
+      - 4.4. Page: Contact (Contact Form)
+      - 4.5. Page: Projects (Project Gallery)
+   5. Sliders & Marquee
+   6. Responsive Media Queries
+=================================================================== */
+
+/* --- 1. General Setup --- */
+:root {
+    --bg-dark: #212121;
+    --container-black: #1a1a1a;
+    --container-grey: #424242;
+    --primary-accent: #c6ff00;
+    --text-light: #ffffff;
+    --text-grey: #bdbdbd;
+    --font-heading: 'Bebas Neue', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: var(--font-body);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* --- 2. Reusable Components --- */
+.container {
+    width: 100%;
+    max-width: 1100px;
+    z-index: 1;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+    background-color: var(--primary-accent);
+    color: var(--bg-dark);
+}
+
+.btn-secondary {
+    background-color: var(--container-grey);
+    color: var(--text-light);
+}
+
+.page-title, .section-title {
+    text-align: center;
+    font-family: var(--font-heading);
+    letter-spacing: 2px;
+}
+
+.page-title {
+    font-size: 3rem;
+    margin: 40px 0;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+}
+
+.page-title span {
+    color: var(--primary-accent);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 3. Layout --- */
+
+/* Header & Navigation */
+.main-nav {
+    background-color: var(--container-grey);
+    border-radius: 15px;
+    padding: 10px 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 10;
+}
+
+.main-nav nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 50px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 10px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    border-radius: 8px;
+}
+
+.nav-links a:hover {
+    color: var(--bg-dark);
+    background-color: var(--primary-accent);
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+    display: none; /* Disembunyikan di desktop */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 11;
+}
+
+.hamburger-menu span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-light);
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger-menu.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger-menu.active span:nth-child(2) { opacity: 0; }
+.hamburger-menu.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+/* Footer */
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid var(--container-grey);
+}
+
+.domain-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-accent);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.footer-nav {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.footer-nav a {
+    color: var(--text-grey);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-nav a:hover {
+    color: var(--text-light);
+}
+
+.copyright {
+    font-size: 0.9rem;
+    color: var(--text-grey);
+}
+
+/* --- 4. Page-Specific Styles --- */
+
+/* 4.1. Page: Home */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.hero-text {
+    background-color: var(--container-black);
+    border-radius: 20px;
+    padding: 40px;
+    flex: 1;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero-text h1 {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    line-height: 1;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.hero-text p {
+    color: var(--text-grey);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.hero-image {
+    flex-basis: 35%;
+}
+
+.hero-image img {
+    width: 100%;
+    border-radius: 20px;
+    transform: rotate(5deg);
+    transition: transform 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.hero-image img:hover {
+    transform: rotate(0deg) scale(1.05);
+}
+
+.cta-bar {
+    background-color: var(--container-grey);
+    border-radius: 15px;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    color: var(--text-light);
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--text-grey);
+    border-radius: 50%;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.social-icons a:hover {
+    background-color: var(--primary-accent);
+    border-color: var(--primary-accent);
+    color: var(--bg-dark);
+}
+
+.cta-bar h2 {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.portfolio {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.portfolio-logo {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    line-height: 1;
+    text-align: center;
+    flex-basis: 15%;
+}
+
+.portfolio-logo .logo-web {
+    font-size: 1rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: var(--primary-accent);
+    display: block;
+    letter-spacing: 4px;
+}
+
+/* 4.2. Page: About */
+.about-intro {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    background-color: var(--container-black);
+    padding: 40px;
+    border-radius: 20px;
+    margin-bottom: 60px;
+}
+
+.about-image {
+    flex-basis: 30%;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 25px;
+}
+
+.about-text {
+    flex-basis: 70%;
+}
+
+.about-text h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+}
+
+.about-text .subtitle {
+    color: var(--primary-accent);
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.skills {
+    margin-bottom: 60px;
+}
+
+.skill-category {
+    padding: 30px 0;
+    margin-bottom: 30px;
+}
+
+.skill-category h3 {
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.education {
+    margin-bottom: 60px;
+}
+
+.timeline {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 5px;
+    bottom: 5px;
+    width: 2px;
+    background-color: var(--container-grey);
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 50px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary-accent);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline-content h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.timeline-content p {
+    color: var(--text-grey);
+    margin: 0;
+}
+
+/* 4.3. Page: Services */
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.service-card {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background-color: var(--container-black);
+    border: 2px solid var(--container-grey);
+    border-radius: 20px;
+    padding: 30px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary-accent);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.service-icon-container {
+    flex-basis: 25%;
+    text-align: center;
+    color: var(--primary-accent);
+}
+
+.service-icon-container i {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.service-icon-container h3 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+.service-description {
+    flex-basis: 75%;
+    color: var(--text-grey);
+    line-height: 1.7;
+}
+
+/* 4.4. Page: Contact */
+.contact-container {
+    display: flex;
+    gap: 40px;
+    background-color: var(--container-black);
+    padding: 40px;
+    border-radius: 20px;
+    margin-bottom: 60px;
+}
+
+.contact-info, .contact-form {
+    flex: 1;
+}
+
+.contact-info h2, .contact-form h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.contact-info p {
+    color: var(--text-grey);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.contact-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-info li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: var(--text-grey);
+}
+
+.contact-info li i {
+    font-size: 1.2rem;
+    color: var(--primary-accent);
+    width: 40px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--container-grey);
+    border: 2px solid var(--container-grey);
+    border-radius: 10px;
+    color: var(--text-light);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-accent);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.contact-form button {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+/* 4.5. Page: Projects */
+.project-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.project-card {
+    background-color: var(--container-black);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+
+.project-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.project-card-content {
+    padding: 25px;
+}
+
+.project-card-content h3 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.project-card-content p {
+    color: var(--text-grey);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* --- 5. Sliders & Marquee --- */
+
+/* Wrapper untuk slider di Halaman Home */
+.portfolio-slider {
+    flex: 1;
+    background-color: var(--primary-accent);
+    border-radius: 20px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* Wrapper untuk slider di Halaman About */
+.skill-slider {
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+/* Style umum untuk slide item */
+.slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Marquee Auto-scroll Effect */
+.marquee .slider-wrapper {
+    gap: 0;
+    width: max-content; 
+    display: flex;
+    animation: scroll-left 45s linear infinite;
+}
+
+.marquee .slide {
+    padding: 0 15px;
+}
+
+.marquee:hover .slider-wrapper {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Penyesuaian spesifik per slider */
+.portfolio-slider marquee {
+    min-width: 300px;
+    padding: 0 10px;
+}
+
+.portfolio-slider .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 15px;
+}
+
+.skill-slider .slide {
+    min-width: 180px;
+    height: 120px;
+    font-size: 4rem;
+}
+
+.portfolio-slider .slide {
+    width: 300px; /* Atur lebar setiap slide portofolio di sini. Ubah nilai ini jika perlu. */
+    padding: 0 10px; /* Memberi sedikit jarak antar gambar */
+}
+
+.portfolio-slider .slide img {
+    width: 100%; /* Membuat gambar mengisi lebar slide */
+    border-radius: 15px; /* Menjaga sudut gambar tetap tumpul */
+}
+
+.skill-slider .slide img {
+    max-width: 60px;
+    max-height: 60px;
+    transition: transform 0.3s;
+}
+
+.skill-slider .fa-html5 { color: #E34F26; }
+.skill-slider .fa-css3-alt { color: #1572B6; }
+.skill-slider .fa-js-square { color: #F7DF1E; }
+.skill-slider .fa-wordpress { color: #21759B; }
+
+.skill-slider .slide:hover {
+    transform: scale(1.05);
+}
+
+    /* Menghilangkan background hijau & mengatur ulang layout untuk slider di halaman About */
+    .skills .portfolio-slider {
+        background-color: transparent;
+        padding: 0;
+        margin-bottom: 40px; /* Memberi jarak antar slider skill */
+    }
+
+    .skills .portfolio-slider h3 {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+
+/* --- 6. Responsive Media Queries --- */
+
+/* Tampilan Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 95%;
+    }
+
+    .hero-text h1 {
+        font-size: 4rem;
+    }
+
+    .nav-links {
+        gap: 30px;
+    }
+}
+
+/* Tampilan Tablet Kecil & Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    body {
+        padding: 20px 15px;
+    }
+
+    /* Layout Stacking */
+    .hero, .about-intro, .service-card, .contact-container, .portfolio {
+        flex-direction: column;
+    }
+
+    .hero-image {
+        order: -1;
+        transform: rotate(0deg);
+        margin-bottom: 30px;
+    }
+    
+    .hero-text, .service-card {
+        text-align: center;
+    }
+    
+    .cta-bar {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .portfolio {
+        gap: 20px;
+    }
+
+    .portfolio-logo {
+        margin-bottom: 10px;
+    }
+
+    .footer-nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* Hamburger Menu */
+    .main-nav nav {
+        justify-content: flex-end;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .nav-links {
+        /* Logika dropdown yang benar */
+        display: none; /* Disembunyikan by default */
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 250px;
+        background-color: var(--container-grey);
+        flex-direction: column;
+        gap: 0;
+        padding: 10px 0;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .nav-links.active {
+        display: flex; /* Dimunculkan saat hamburger di-klik */
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 15px 25px;
+        width: 100%;
+        text-align: left;
+    }
+}
+
+/* Tampilan Mobile Kecil (max-width: 480px) */
+@media (max-width: 480px) {
+    .hero-text h1 {
+        font-size: 3rem;
+    }
+
+    .hero-text, .about-intro {
+        padding: 25px;
+    }
+
+    .timeline {
+        padding-left: 0;
+    }
+    
+    .timeline-item {
+        padding-left: 35px;
+    }
+
+    .timeline-dot {
+        left: 0;
+    }
+
+    .portfolio-slider .slide {
+        min-width: 280px;
+    }
+}
