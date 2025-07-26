@@ -81,8 +81,8 @@ body {
 }
 
 .btn-secondary {
-    background-color: var(--container-grey);
-    color: var(--text-light);
+    background-color: var(--primary-accent);
+    color: var(--container-grey);
 }
 
 .page-title, .section-title {
